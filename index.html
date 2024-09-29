@@ -4,14 +4,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crypto Sentiment Analysis</title>
+    <title>Crypto Sentiment & News</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+        .sidebar a {
+            color: black;
+            text-decoration: none;
+            padding: 5px;
+            display: inline-block;
+            width: 80%;
+        }
+        .sidebar a:hover {
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 10px;
+        }
+        .category-section {
+            display: none;
         }
         .summary-text {
             font-family: Arial, sans-serif;
@@ -19,7 +54,6 @@
             word-wrap: break-word;
             line-height: 1.6;
         }
-
         h1 {
             color: #2c3e50;
         }
@@ -42,23 +76,6 @@
         .positive { background-color: #2ecc71; }
         .neutral { background-color: #95a5a6; }
         .negative { background-color: #e74c3c; }
-
-        .toc-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-        .toc-column {
-            width: 23%;
-        }
-        .toc-column ul {
-            padding-left: 20px;
-            margin-top: 0;
-            list-style-type: none;
-        }
-        .toc-column li {
-            margin-bottom: 5px;
-        }
         .sentiment-columns {
             display: flex;
             justify-content: space-between;
@@ -68,12 +85,13 @@
             text-align: center;
         }
     </style>
-    <link rel="stylesheet" href="styles.css?v=1727621945.118482">
+    <link rel="stylesheet" href="styles.css?v=1727643269.602379">
 </head>
 <body>
-    <h1>Crypto Sentiment Analysis</h1>
-    <h2>Contents</h2><p>Sorted by biggest change in either positive or negative sentiment:</p><div class='toc-container'><div class='toc-column'><ul><li><a href="#btc">BTC</a></li><li><a href="#link">LINK</a></li><li><a href="#bnb">BNB</a></li><li><a href="#trx">TRX</a></li><li><a href="#sol">SOL</a></li></ul></div><div class='toc-column'><ul><li><a href="#eth">ETH</a></li><li><a href="#shib">SHIB</a></li><li><a href="#dot">DOT</a></li><li><a href="#xrp">XRP</a></li></ul></div><div class='toc-column'><ul><li><a href="#ada">ADA</a></li><li><a href="#doge">DOGE</a></li><li><a href="#ton">TON</a></li><li><a href="#ads">ADS</a></li></ul></div><div class='toc-column'><ul><li><a href="#avax">AVAX</a></li><li><a href="#bch">BCH</a></li><li><a href="#mob">MOB</a></li><li><a href="#near">NEAR</a></li></ul></div></div>
-    <h2>General Summary</h2><div class="summary-text">Hello and welcome to CryptoQuant, your go-to source for the latest cryptocurrency news. I'm your host, here to bring you a comprehensive summary of the top stories in the crypto space.
+    <div class='sidebar'><h2>Categories</h2><ul><li><a href="#" onclick="showCategory('general-summary')">General Summary</a></li><li><a href="#" onclick="showCategory('btc')">BTC</a></li><li><a href="#" onclick="showCategory('link')">LINK</a></li><li><a href="#" onclick="showCategory('bnb')">BNB</a></li><li><a href="#" onclick="showCategory('trx')">TRX</a></li><li><a href="#" onclick="showCategory('sol')">SOL</a></li><li><a href="#" onclick="showCategory('eth')">ETH</a></li><li><a href="#" onclick="showCategory('shib')">SHIB</a></li><li><a href="#" onclick="showCategory('dot')">DOT</a></li><li><a href="#" onclick="showCategory('xrp')">XRP</a></li><li><a href="#" onclick="showCategory('ada')">ADA</a></li><li><a href="#" onclick="showCategory('doge')">DOGE</a></li><li><a href="#" onclick="showCategory('ton')">TON</a></li><li><a href="#" onclick="showCategory('ads')">ADS</a></li><li><a href="#" onclick="showCategory('avax')">AVAX</a></li><li><a href="#" onclick="showCategory('bch')">BCH</a></li><li><a href="#" onclick="showCategory('mob')">MOB</a></li><li><a href="#" onclick="showCategory('near')">NEAR</a></li></ul></div>
+    <div class="main-content">
+        <h1>Crypto Sentiment & News</h1>
+        <div id="general-summary"><h2>General Summary</h2><div class="summary-text">Hello and welcome to CryptoQuant, your go-to source for the latest cryptocurrency news. I'm your host, here to bring you a comprehensive summary of the top stories in the crypto space.
 First up, Bitcoin ETF options have hit the US market, offering investors new trading alternatives. But what does this mean for the future of Bitcoin? On one hand, it could attract longer-term investors and increase liquidity in the market. However, some experts warn that it may also lead to a surge in paper supply, potentially putting downward pressure on prices.
 As we explore these developments, we're reminded that cryptocurrencies are being increasingly integrated into various sectors of the economy. Take AI applications, for example. Six cutting-edge technologies already in use in healthcare are changing the game and have significant implications for crypto adoption. We'll dive deeper into this topic later in our summary.
 But for now, let's talk about Bitcoin itself. Investor interest has reached levels worse than those seen during previous bear markets, sparking concerns that the cryptocurrency may be at risk. This is a worrying trend, especially given the current market volatility. However, as always, it's essential to remember that past performance is not necessarily indicative of future results.
@@ -82,8 +100,8 @@ Now, let's move on to some more positive news. Binance's CEO, after being releas
 And speaking of innovation, Solana is reportedly targeting a price of $350, while other cryptocurrencies like Floki and Toncoin show promising growth. This bullish sentiment may be short-lived, but it's certainly something to keep an eye on as the market continues to evolve.
 We're also keeping an eye on meme coins, which are expected to see significant gains in the October bull run. Floki, Gigachad, and Dogelon Mars are just a few examples of coins that could potentially explode in value. However, it's essential to remember that investing in meme coins is always a high-risk, high-reward proposition.
 In this week's CryptoQuant, we're focusing on key developments in the cryptocurrency space. As you can see from our summary, there's no shortage of exciting news and trends to explore. From AI applications to meme coins, each topic has significant implications for investors and the broader crypto community.
-That's all for this week's CryptoQuant. Stay tuned for more updates from the world of cryptocurrency!</div>
-    
+That's all for this week's CryptoQuant. Stay tuned for more updates from the world of cryptocurrency!</div></div>
+        <div id="btc" class="category-section">
     <h2 id="btc">BTC</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -104,7 +122,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Price and Market Updates<br><br> The market is bullish, with sentiment at 65%.<br> Israel killing Hezbollah leader Hassan Nasrallah may lead to a downturn in Bitcoin's price.<br> A platform called moomoo is being accused of contributing to child sex slave operations through its buying activities.<br><br>Technical Analysis and Forecasts<br><br> There are forecasts for the price of Bitcoin to reach $66,000 and then potentially break through to $68,000.<br><br>Trading Platforms and Services<br><br> Localcoin offers a Bitcoin ATM that allows users to buy Bitcoin and Ethereum using cash.<br><br>Social Media Posts and Community Updates<br><br> A community post claims that buying Bitcoin is helping child sex slave operations make money due to cartels gaining wealth.<br><br>Overall, the current state of Bitcoin seems to be focused on its price and market performance, with various predictions and forecasts being made by analysts and traders.</p>
-    
+    </div><div id="link" class="category-section">
     <h2 id="link">LINK</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -125,7 +143,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">1. Chemical compound: The original post in the chemistry subreddit asks about the feasibility of synthesizing chain-link macrocycles, which is a type of molecule.<br>2. Blockchain project: Chainlink  is a decentralized oracle network that provides real-time data to smart contracts on the Ethereum blockchain. It's used for various applications, including DeFi and DApps.<br><br>To answer your question about the feasibility of synthesizing chain-link macrocycles:<br><br>The original post in the chemistry subreddit suggests that catenanes can occur naturally when bacteria replicate their circular DNA. However, synthesizing chain-link macrocycles as a chemical compound seems to be a complex task that requires significant expertise in organic chemistry and materials science.<br><br>There is limited information available on this specific topic, but it's likely that researchers have explored the synthesis of such molecules in academic or industrial settings. If you're interested in learning more, I recommend searching for peer-reviewed articles or consulting with experts in the field of organic chemistry.<br><br>As for Chainlink , the blockchain project, there is a wealth of information available online, including its use cases, partnerships, and market performance.</p>
-    
+    </div><div id="bnb" class="category-section">
     <h2 id="bnb">BNB</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -146,7 +164,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Solana is gearing up for significant news in Singapore. Meanwhile, Binance Coin  faces resistance and is under pressure. The token's price has been affected by various events, including the release of Changpeng Zhao , the founder of Binance, from prison. CZ's early release led to a rally in BNB's price, but it later dropped slightly. Despite this, BNB has shown resilience and continues to climb, with some analysts predicting it may reach new highs. However, if key resistance is held, a $300 target looms for the token. BNB's performance will depend on its success in reaching a new all-time high, which could be impacted by its fundamental improvements and use cases beyond DeFi.</p>
-    
+    </div><div id="trx" class="category-section">
     <h2 id="trx">TRX</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -167,7 +185,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Lunex Network's advanced trading strategies are attracting investors from Cardano and Tron. Five altcoins under $5, including TRON , could outperform its 7,300% rally. Tron and Binance holders are buzzing about Rollblock's presale, a top altcoin with credentials to back it up. The October crypto rally is imminent, according to some experts, and Tron price is bullish. BDAG offers 50% bonus rewards for early holders, while ETH rises and TON Wallet upgrades allow users to access TronDAO assets directly. Ripple's top 5 tokens to consider over XRP include TRON, among others. Shiba Inu bulls take SHIB to the top of Robinhood and Grayscale gainers list, with Bitcoin, Toncoin, Tron, and XRP having weekly gains. A Tron price prediction suggests it may crash to $0, while Toncoin, RCO Finance, and TRON are competing as the next crypto AI token to outperform. The Tron blockchain offers fast and affordable transactions for USDT tokens, but each transaction requires resources - TRX.</p>
-    
+    </div><div id="sol" class="category-section">
     <h2 id="sol">SOL</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -188,7 +206,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Solana  has been experiencing significant price fluctuations. The token hit a new all-time high just 2 hours ago, with its value surging by 1,300% in a week. Moo Deng is trading above $0.25 per token and has a market cap of $243 million. Some analysts predict that SOL could reach up to $400 or higher, while others believe it may experience a pullback before another breakout. Additionally, Solana is expected to surpass $300 due to its fees rivaling those of Ethereum.</p>
-    
+    </div><div id="eth" class="category-section">
     <h2 id="eth">ETH</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -209,7 +227,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Ethereum's price has been fluctuating, with some analysts predicting a potential breakout or breakdown in the coming weeks. The cryptocurrency rose 62.97% over the year to reach $2,583.22, and Ethereum-based memecoins have continued to dominate.<br><br>Vitalik Buterin, co-founder of Ethereum, has teased plans to enhance the platform by making it open-source, minimizing centralization, and supporting public goods as part of the "Ethereum Alignment" concept. This move aims to promote decentralization and cooperation within the ecosystem.<br><br>Two institutions are reportedly selling their Ethereum holdings, causing concern among investors. However, spot Ethereum ETF inflows have prevented the price from falling despite these sell-offs.<br><br>The Ethereum price analysis shows that whales booked $72M profits as ETH hit $2,700. This is not a cause for concern, but rather an opportunity for investors to review their strategies and make informed decisions.<br><br>Some analysts predict that Ethereum's price will reach $3,000 if funding rates remain stable. However, the cryptocurrency's struggle to rise above this mark since August 2024 has sparked concern among analysts and investors.<br><br>The partnership between Ethena and EigenLayer, an Ethereum restaking protocol, has led to a surge in Ethena's price by more than 45% this week. This development highlights the growing interest in alternative cryptocurrencies that offer speed and scalability.</p>
-    
+    </div><div id="shib" class="category-section">
     <h2 id="shib">SHIB</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -230,7 +248,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Shiba Inu  Price Update<br><br>The Shiba Inu cryptocurrency has experienced significant growth, with its price increasing by 37% in a week and reaching $0.00001977 USD as of now. This surge is attributed to the recent positive market movements, increased interest in the Shiba Inu ecosystem, and the token's developer expressing enthusiasm on X. SHIB has surpassed major companies' gains, making it one of the most popular and influential projects leading market trends.<br><br>Recent Developments<br><br> The project's social dominance has reached new heights, with whale transactions reaching all-time highs within 10 weeks.<br>* Shibarium TVL has also reached an all-time high of $7.03 million.<br><br>Price Forecasts<br><br>Investors are advised to wait for a slight calming of the strong uptrend before considering purchasing SHIB, as it may potentially surpass its previous high of $0.000043 USD in February. A Shiba Inu ETF approval is expected to lead to a significant surge in SHIB prices, potentially reaching a 2200% rally within 10 days.<br><br>Market Trends<br><br>The excitement around alternative currencies continues, with Shiba Inu being a top-performing project. Notably, Shiba Inu's on-chain activity has increased significantly compared to other meme coins and altcoins.</p>
-    
+    </div><div id="dot" class="category-section">
     <h2 id="dot">DOT</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -251,7 +269,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Polkadot  continues to be in a bearish trend, having failed to push above $5. The price chart shows a falling wedge pattern, which could potentially indicate a reversal in the coming days. However, there is no concrete evidence of this yet.<br><br>There are numerous mentions of Polka dots and Polkadot-related products online, such as clothing, accessories, and packaging materials, but none of them contain any relevant information about the cryptocurrency.<br><br>One article from SHEIN ASIA mentions adding a product to their shopping cart, which contains information about DOT, but it appears to be unrelated to the cryptocurrency. The title simply reads "Trends SHEIN Clasi Plus Size Polka Dot Printed Summer Shorts," with no further details provided.</p>
-    
+    </div><div id="xrp" class="category-section">
     <h2 id="xrp">XRP</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -272,7 +290,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Ripple has performed a massive minting of 350,000 RLUSD stablecoins on the XRP Ledger and Ethereum mainnet in just 24 hours. This is part of Ripple's testing phase to ensure security, efficiency, and reliability standards before a wider launch. The RLUSD stablecoin is backed by short-term U.S. Treasury securities, dollar deposits, and cash equivalents.<br><br>Additionally, two amendments have been activated on the XRP Ledger mainnet, fixing previous issues with ledger objects and upcoming DID support. Top Ripple executives are also set to attend the Federal Reserve Bank's 8th Annual Fintech Conference, which may further boost the price of XRP.<br><br>Market analysts predict that XRP could surge by up to 888% if it recaptures previous highs, while others predict a stagnation in its price despite overall market gains. The SEC may also challenge Ripple's court ruling by October 7, potentially reshaping crypto regulation and affecting the price of XRP.<br><br>The XRP Ledger has shipped two major updates ahead of the RLUSD stablecoin launch, which is expected to open up new opportunities, liquidity, and institutional use cases on the network.</p>
-    
+    </div><div id="ada" class="category-section">
     <h2 id="ada">ADA</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -293,7 +311,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Technical analysis and indicators flashing sell signals or potential rallies<br> Updates on the project's development and ambitions<br>* Discussions on charting platforms and market trends<br><br>The tone of the summaries is neutral/informative, providing a snapshot of various online discussions and news articles about Cardano. The text does not contain any personal opinions or biases.<br><br>Here are some key points extracted from the text:<br><br>1. Price predictions: Some sources predict that ADA might correct its price, while others suggest it could reach $3.10, its 2021 all-time high.<br>2. Technical analysis: Technical indicators like RSI and MACD display bearish signals, but there are also signs of a potential rally on the weekly chart.<br>3. Comparison with other cryptos: ADA is compared to Solana and Dogecoin, with some sources suggesting it might outperform Solana or retrace its price like Dogecoin.<br>4. Development updates: Cardano's blockchain is mentioned as secure and based on Proof of Stake mechanism.<br>5. Market trends: The text touches on the uncertainty of cryptocurrency markets and the importance of due diligence before making investment decisions.<br><br>Overall, the summaries provide a snapshot of online discussions and news articles about Cardano, covering various aspects of its development, market performance, and comparisons with other cryptocurrencies.<br><br>The internet is full of mentions of ADA! It seems like ADA has been the talk of the day!</p>
-    
+    </div><div id="doge" class="category-section">
     <h2 id="doge">DOGE</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -314,7 +332,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">The price of Dogecoin  has been fluctuating, with some articles suggesting it may reach $1 or experience another significant surge. Whales have bought 1.4 billion DOGE for $140 million, and trading volume has increased by 50% to over $1.5 billion. Some analysts predict a possible 100% rally next for DOGE's price, citing its past performance. Additionally, BlackRock is backing a new U.S. dollar rival, with DOGE mentioned alongside its price. However, others note that Dogecoin has flashed a sell signal on its daily charts, raising questions about its future trajectory. Some articles also compare DOGE to other cryptocurrencies like Shiba Inu and Rollblock, which have seen significant price surges in the past.<br><br>The internet is full of mentions of DOGE! It seems like DOGE has been the talk of the day!</p>
-    
+    </div><div id="ton" class="category-section">
     <h2 id="ton">TON</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -335,7 +353,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Toncoin's price has been in consolidation, but it could potentially pump if a specific resistance level is broken. The cryptocurrency has seen a range of activities on the TON Network, including a surge in decentralized exchange activity with STON.Fi leading the way. Toncoin has also been mentioned as one of the top altcoins to fuel retirement portfolios alongside other cryptocurrencies like XRP, SOL, and ADA. Additionally, there are predictions that Toncoin could experience growth similar to other cryptocurrencies in October. Early investors in Toncoin have reportedly recorded 500% profits with Cybro's presale surging over $2.7M mark.<br><br>The internet is full of mentions of TON! It seems like TON has been the talk of the day!</p>
-    
+    </div><div id="ads" class="category-section">
     <h2 id="ads">ADS</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -356,7 +374,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">The cryptocurrency markets are experiencing a moderate surge in activity, with ADS  being a focal point. Online discussions suggest investors are taking notice of ADS's potential for growth, particularly due to its compatibility with the Algorand network and its role as a stablecoin within that ecosystem.<br><br>Some online forums and chat platforms indicate a growing interest in ADS among traders and investors, driven by expectations of increased adoption and utility within the Algorand platform. This sentiment is reflected in the rising trading volumes and prices observed on various cryptocurrency exchanges.<br><br>However, there are also some concerns being raised about potential regulatory scrutiny and market volatility affecting the price of ADS. Online commentators are urging caution and reminding users to diversify their portfolios to mitigate risk.<br><br>Overall, pretty much no one is talking about ADS currently.</p>
-    
+    </div><div id="avax" class="category-section">
     <h2 id="avax">AVAX</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -377,7 +395,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">Avalanche  is experiencing growth and positive sentiment, with experts highlighting its potential for further increase. The platform has introduced new initiatives to support developers, including the Retro9000 grants program, which aims to reward projects built on the Avalanche testnet.<br><br>The current price of AVAX/USDT on Uniswap V3 is around $23.80, with a 24-hour trading volume of $0.2163. The platform has seen a 25% surge in price over the last two weeks, driven by its focus on on-chain growth and developer support.<br><br>Analysts suggest that AVAX has broken out from a descending channel pattern, indicating a potential reversal of its downtrend. The next key target for AVAX is not specified, but it implies further growth.<br><br>Additionally, there are mentions of other cryptocurrencies such as Uniswap , FLOKI, and XRP, which may be related to AVAX in some way. However, I couldn't find any specific connections or news articles that discuss their relationships with AVAX.<br><br>Overall, the internet seems to be indicating a positive trend for AVAX, with its price growth and new initiatives driving excitement among investors and developers.</p>
-    
+    </div><div id="bch" class="category-section">
     <h2 id="bch">BCH</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -398,7 +416,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">has seen renewed enthusiasm due to improved scalability.<br> is eyeing key price targets amidst market fluctuations.<br>* Whale activity in the cryptocurrency market has peaked.<br><br>Additionally, Bitcoin Cash has broken out of its descending channel on the 12H chart, indicating strong bullish momentum. This could lead to further gains, potentially reaching $705 with continued momentum.<br><br>Overall, pretty much no one is talking about BCH currently.</p>
-    
+    </div><div id="mob" class="category-section">
     <h2 id="mob">MOB</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -419,7 +437,7 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">MobileCoin, a privacy-focused cryptocurrency, has been gaining attention for its efficiency and user-friendliness. Launched in 2007 by MobileCoin Inc., this digital currency enables secure mobile payments with enhanced anonymity features, making it an attractive option for those seeking private transactions. As interest in cryptocurrencies continues to grow, MobileCoin's unique blend of convenience and security is worth noting.<br><br>Overall, pretty much no one is talking about MOB currently.</p>
-    
+    </div><div id="near" class="category-section">
     <h2 id="near">NEAR</h2>
     <h3>Sentiment Analysis:</h3>
     <div class="sentiment-chart">
@@ -440,6 +458,27 @@ That's all for this week's CryptoQuant. Stay tuned for more updates from the wor
     </div>
     <h3>News Summary:</h3>
     <p class="analysis-text">The future of apps is chain-abstracted, powered by NEAR Protocol on X.<br> Near Protocol's price has increased by 50% in September 2024, driven by increasing user activity, network upgrades, and external market influences.<br> Solana is also expected to experience a potential price upshift, with expert Sheldon The Sniper stating that Solana is "getting ready to go again."<br> NEAR Protocol's ecosystem bounties are being hosted on NEAR Protocol.<br> A chart analysis suggests that now may be a good time to buy NEAR, with potential for a wild ride ahead.</p>
+    </div>
+    </div>
+    
+    <script>
+    function showCategory(categoryId) {
+        var generalSummary = document.getElementById('general-summary');
+        var categories = document.getElementsByClassName('category-section');
+        
+        if (categoryId === 'general-summary') {
+            generalSummary.style.display = 'block';
+            for (var i = 0; i < categories.length; i++) {
+                categories[i].style.display = 'none';
+            }
+        } else {
+            generalSummary.style.display = 'none';
+            for (var i = 0; i < categories.length; i++) {
+                categories[i].style.display = categories[i].id === categoryId ? 'block' : 'none';
+            }
+        }
+    }
+    </script>
     
 </body>
 </html>
